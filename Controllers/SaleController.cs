@@ -5,14 +5,21 @@ using System.Linq;
 
 namespace ApiFrabricaDeAutos.Controllers
 {
+    /// <summary>
+    /// Controlador encargado de la persistencia de las ventas
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class SaleController : ControllerBase
     {
+        #region Database
         public static List<Car> carList = new List<Car>();
         public static List<DistributionCenter> distributionCenterList = new List<DistributionCenter>();
+        public static List<Sale> salesList = new List<Sale>();
+        #endregion  
+
         /// <summary>
-        /// Metodo que genera la venta
+        /// Genera la venta y la almacena
         /// </summary>
         /// <param name="sale"></param>
         /// <returns></returns>
@@ -23,14 +30,16 @@ namespace ApiFrabricaDeAutos.Controllers
             distributionCenterList = DatabaseController.distributionCenterList;
             try
             {
-                sale.car.model = sale.car.model.ToLower().Trim();
+                // convirtiendo todo a minusculas y sin espacios
+                sale.car.model = sale.car.model.ToLower().Trim(); 
                 sale.distributionCenter.Name = sale.distributionCenter.Name.ToLower().Trim();
-                if (distributionCenterList.FindAll(x => x.Name == sale.distributionCenter.Name).Count > 0)
+
+                if (distributionCenterList.FindAll(x => x.Name == sale.distributionCenter.Name).Count > 0) // validacion del nombre del centro de distribuiciòn 
                 {
-                    if (!string.IsNullOrEmpty(sale.car.model) && carList.FindAll(x => x.model == sale.car.model).Count > 0)
+                    if (!string.IsNullOrEmpty(sale.car.model) && carList.FindAll(x => x.model == sale.car.model).Count > 0) // validacion del modelo del auto
                     {
+                        salesList.Add(sale);
                         sale.message = "Venta aprobada";
-                        //ventasList.Add(sale);
                     }
                     else
                         sale.message = "No existe el modelo del auto";

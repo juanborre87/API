@@ -5,16 +5,20 @@ using System.Text.Json;
 
 namespace ApiFrabricaDeAutos.Controllers
 {
+    /// <summary>
+    /// Controlador encargado de llenar las listas para utilizarlas como supuesta base de datos
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class DatabaseController : ControllerBase
     {
-        //Datos filtrados provenientes de una supuesta base de datos real - BD interna
+        #region Database
         public static List<Car> carList = new List<Car>();
         public static List<DistributionCenter> distributionCenterList = new List<DistributionCenter>();
+        #endregion
 
         // <summary>
-        /// Metodo que inserta los datos iniciales  de los autos a la BD interna
+        /// Inserta los datos iniciales  de los autos
         /// </summary>
         /// <param name="venta"></param>
         /// <returns></returns>
@@ -26,9 +30,9 @@ namespace ApiFrabricaDeAutos.Controllers
                 carList = cars.ToList();              
                 foreach (var car in carList)
                 {
-                    car.model = car.model.ToLower().Trim();
+                    car.model = car.model.ToLower().Trim(); // convirtiendo todo a minusculas y sin espacios
                     if (car.model == "sport")
-                        car.price = car.price + (car.price * 0.7);
+                        car.price = car.price + (car.price * 0.7); // calculando el impuesto  del 70% al auto modelo sport
                 }
                 return "Los datos se han cargado correctamente";
             }
@@ -39,7 +43,7 @@ namespace ApiFrabricaDeAutos.Controllers
         }
 
         // <summary>
-        /// Metodo que inserta los datos iniciales de los distribuidoresa la BD interna
+        /// Inserta los datos iniciales de los centros de distribucion
         /// </summary>
         /// <param name="venta"></param>
         /// <returns></returns>
@@ -51,7 +55,7 @@ namespace ApiFrabricaDeAutos.Controllers
                 distributionCenterList = distributionCenters.ToList();
                 foreach (var distributionCenter in distributionCenterList)
                 {
-                    distributionCenter.Name = distributionCenter.Name.ToLower().Trim();
+                    distributionCenter.Name = distributionCenter.Name.ToLower().Trim(); // convirtiendo todo a minusculas y sin espacios
                 }
                 return "Los datos se han cargado correctamente";
             }
