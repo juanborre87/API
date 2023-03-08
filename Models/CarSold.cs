@@ -1,12 +1,12 @@
 ﻿namespace ApiFrabricaDeAutos.Models
 {
     /// <summary>
-    /// Autos vendidos
+    /// Auto vendido
     /// </summary>
-    public class TotalCarsSold
+    public class CarSold
     {
         /// <summary>
-        /// Entidad auto
+        /// Auto vendido
         /// </summary>
         public Car car { get; set; }
         /// <summary>
@@ -14,8 +14,8 @@
         /// </summary>
         public int amount { get; set; }
         /// <summary>
-        /// Pocentajes de venta 
+        /// Percentage de ventas
         /// </summary>
-        public double percentageSales { get; set; }
+        public double percentage { get; set; }
     }
 }

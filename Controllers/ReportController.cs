@@ -13,7 +13,7 @@ namespace ApiFrabricaDeAutos.Controllers
         #region Database
         public static List<Car> carList = new List<Car>();
         public static List<DistributionCenter> distributionCenterList = new List<DistributionCenter>();
-        public static List<Sale> salesList = new List<Sale>();
+        public static TotalSale totalSale = new TotalSale();
         #endregion 
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace ApiFrabricaDeAutos.Controllers
             Report report = new Report();
             try
             {
-                //report = GetsalesReport();
+                report = GetsalesReport();
                 report.message = "El reporte se ha generado con exito";
                 return report;
 
@@ -47,12 +47,44 @@ namespace ApiFrabricaDeAutos.Controllers
         /// <returns></returns>
         private Report GetsalesReport()
         {
-            carList = DatabaseController.carList;
-            distributionCenterList = DatabaseController.distributionCenterList;
-            salesList = SaleController.salesList;
-            Report reporte = new Report();
+            carList = DatabaseController.carsDataBase;
+            distributionCenterList = DatabaseController.distributionCentersDataBase;
+            totalSale = DatabaseController.totalSaleDataBase;
+            Report report = new Report();
+            report.totalSale = totalSale.total;
+            report.totalSalesByDistributionCenter = new List<Data1>();
+            report.percentage = new List<Percentage>();
+            foreach (var dtCenter in distributionCenterList)
+            {
+                report.totalSalesByDistributionCenter.Add(new Data1
+                {
+                    name = dtCenter.distributionCenterData.Name,
+                    total = dtCenter.total                  
+                });
 
-            return reporte;
+                foreach (var autoSold in dtCenter.carsSoldList)
+                {
+                    report.percentage.Add(new Percentage
+                    {
+                        distributionCenter = new DistributionCenterData
+                        {
+                            Name = dtCenter.distributionCenterData.Name,
+                        },
+                        data = new List<Data2>
+                        {
+                            new Data2()
+                            {
+                                model = autoSold.car.model,
+                                total = autoSold.percentage
+                            }
+                        }
+                    });
+
+                }
+
+            }
+            
+            return report;
         }
     }
 }

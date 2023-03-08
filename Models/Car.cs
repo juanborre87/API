@@ -1,7 +1,7 @@
 ﻿namespace ApiFrabricaDeAutos.Models
 {
     /// <summary>
-    /// Atributos de un auto
+    /// Automovil
     /// </summary>
     public class Car
     {

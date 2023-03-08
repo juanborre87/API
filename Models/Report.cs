@@ -6,15 +6,19 @@
     public class Report
     {
         /// <summary>
-        /// Volumen de ventas de toda la fabrica
+        /// Total de ventas
         /// </summary>
-        public TotalFactorySales factory { get; set; }
+        public double totalSale { get; set; }
         /// <summary>
-        /// Listado de volumen de ventas por centro de distribuciòn
+        /// Listado de totales de las ventas de cada centro de distribucion
         /// </summary>
-        public List<TotalSaleDistributionCenter> distributionCenter { get; set; }
+        public List<Data1> totalSalesByDistributionCenter { get; set; }
         /// <summary>
-        /// mensaje
+        /// Listado de porcentajes de las ventas de cada centro de distribucion por cada modelo de auto
+        /// </summary>
+        public List<Percentage> percentage { get; set; }
+        /// <summary>
+        /// Mensaje
         /// </summary>
         public string message { get; set; }
     }
