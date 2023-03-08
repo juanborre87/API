@@ -56,7 +56,7 @@ namespace ApiFrabricaDeAutos.Controllers
 
                     }
                     totalSaleDataBase.carsSoldList = new List<CarSold>();
-                    foreach (var car in carsDataBase) // almacenamiento del listado de autos en la base de datos interna
+                    foreach (var car in carsDataBase) // almacenamiento del listado de autos en la base de datos interna - listado general
                     {
                         totalSaleDataBase.carsSoldList.Add(new CarSold
                         {
@@ -94,7 +94,7 @@ namespace ApiFrabricaDeAutos.Controllers
                                     }
                                 });
                             }
-                            totalSaleDataBase.carsSoldList.Add(new CarSold // Adiciona un nuevo modelo a la lista
+                            totalSaleDataBase.carsSoldList.Add(new CarSold // adiciona un nuevo modelo a la lista general
                             {
                                 car = new Car
                                 {

@@ -56,15 +56,15 @@ namespace ApiFrabricaDeAutos.Controllers
             report.percentage = new List<Percentage>();
             foreach (var dtCenter in distributionCenterList)
             {
-                report.totalSalesByDistributionCenter.Add(new Data1
+                report.totalSalesByDistributionCenter.Add(new Data1 // generando total de ventas por centro de distribucion
                 {
-                    name = dtCenter.distributionCenterData.Name,
+                    name = dtCenter.distributionCenterData.Name, 
                     total = dtCenter.total                  
                 });
 
                 foreach (var autoSold in dtCenter.carsSoldList)
                 {
-                    report.percentage.Add(new Percentage
+                    report.percentage.Add(new Percentage // generando porcentajes de venta por cada modelo y por cada centro de distribucion
                     {
                         distributionCenter = new DistributionCenterData
                         {
@@ -75,7 +75,7 @@ namespace ApiFrabricaDeAutos.Controllers
                             new Data2()
                             {
                                 model = autoSold.car.model,
-                                total = autoSold.percentage
+                                percent = autoSold.percentage
                             }
                         }
                     });

@@ -7,8 +7,8 @@
         /// </summary>
         public string model { get; set; }
         /// <summary>
-        /// Total
+        /// Porcentaje
         /// </summary>
-        public double total { get; set; }
+        public double percent { get; set; }
     }
 }
